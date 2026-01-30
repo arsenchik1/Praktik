@@ -1,1 +1,22 @@
-d
+web
+├── README.md
+├── backend/
+│   ├── manage.py
+│   ├── backend/
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   └── employees/
+│       ├── __init__.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── models.py
+│       ├── tests.py
+│       ├── views.py
+│       ├── urls.py
+│       └── serializers.py
+├── README_TASK.md
+├── README_SCREEN.md
+└── requirements.txt
