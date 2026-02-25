@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./data/urls.db
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - BASE_URL=http://localhost:8000
+    volumes:
+      - ./:/app
+      - sqlite_data:/app/data
+    command: uvicorn internal.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  sqlite_data:
