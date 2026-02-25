@@ -12,23 +12,27 @@ from .storage.database import init_db, close_db
 async def lifespan(app: FastAPI):
     """Lifespan context manager for startup and shutdown events."""
     # Startup
+    print("Starting up...")
     await init_db()
+    print("Database initialized")
     yield
     # Shutdown
+    print("Shutting down...")
     await close_db()
+    print("Database closed")
 
 
 def create_application() -> FastAPI:
     """Create FastAPI application."""
     settings = get_settings()
-    
+
     app = FastAPI(
         title=settings.app_name,
         debug=settings.debug,
         version="1.0.0",
         lifespan=lifespan
     )
-    
+
     # CORS middleware
     app.add_middleware(
         CORSMiddleware,
@@ -37,15 +41,30 @@ def create_application() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    
-    # Include routers
-    app.include_router(endpoints.router)
-    
-    @app.get("/health")
+
+    # Явно добавляем health check перед другими роутами
+    @app.get("/health", tags=["health"])
     async def health_check():
         """Health check endpoint."""
-        return {"status": "healthy"}
-    
+        return {
+            "status": "healthy",
+            "database": "connected",
+            "app": "running",
+            "version": "1.0.0"
+        }
+
+    # Include routers
+    app.include_router(endpoints.router)
+
+    # Добавим корневой эндпоинт для проверки
+    @app.get("/", tags=["root"])
+    async def root():
+        return {
+            "message": "URL Shortener API",
+            "docs": "/docs",
+            "health": "/health"
+        }
+
     return app
 
 

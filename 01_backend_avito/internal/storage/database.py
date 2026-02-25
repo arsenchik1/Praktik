@@ -2,23 +2,21 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.asyncio import async_sessionmaker
 from typing import AsyncGenerator
+import os
 
 from ..config.settings import get_settings
 from ..models.url import Base
 
 settings = get_settings()
 
-# Convert postgresql:// to postgresql+asyncpg://
-database_url = str(settings.database_url)
-if database_url.startswith("postgresql://"):
-    database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+# Get database URL from settings
+database_url = settings.database_url
 
+# Создаем движок для любой БД
 engine = create_async_engine(
     database_url,
-    pool_size=settings.database_pool_size,
-    max_overflow=settings.database_max_overflow,
-    pool_pre_ping=True,
-    echo=settings.debug
+    echo=settings.debug,
+    future=True
 )
 
 AsyncSessionLocal = async_sessionmaker(
