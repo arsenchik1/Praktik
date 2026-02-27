@@ -23,7 +23,13 @@
 | 4 | Oxem Studio - Блог платформа | Oxem Studio | [04_backend_oxem](./04_backend_oxem) | ✅ Готово |
 | 5 | Social Media Holding - Агрегатор постов | Social Media Holding | [05_backend_social-media](./05_backend_social-media) | ✅ Готово |
 
+### Выборочные задания - 3 шт.
 
+| № | Название | Направление | Компания | Ссылка | Статус |
+|---|----------|-------------|----------|--------|--------|
+| 1 | Конвертер валют | Frontend | Hexlet | [06_frontend_currency_converter](./06_frontend_currency_converter) | ✅ Готово |
+| 2 | GitHub Issues Viewer | Frontend | GitHub API | [07_frontend_github-issues](./07_frontend_github-issues) | ✅ Готово |
+| 3 | Социальная сеть для холдинга | Fullstack | Social Media Holding | [08_fullstack_social-media](./08_fullstack_social-media) | ✅ Готово |
 
 ## Технологический стек
 
@@ -48,5 +54,4 @@
 - **CI/CD:** GitHub Actions
 - **Container:** Docker
 - **Orchestration:** Docker Compose
-
 
